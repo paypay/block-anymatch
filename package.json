@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
+  "name": "match-lines-action",
+  "version": "1.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "GitHub Action to match lines against a regular expression, glob, string, or function",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -15,17 +15,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/paypay/match-lines-action.git"
   },
   "keywords": [
     "actions",
     "node",
-    "setup"
+    "typescript"
   ],
-  "author": "",
+  "author": "PayPay",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0"
+    "@actions/core": "^1.6.0",
+    "anymatch": "^3.1.2"
   },
   "devDependencies": {
     "@types/node": "^16.10.5",

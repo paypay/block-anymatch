@@ -1,11 +1,20 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Match Lines'
+description: 'GitHub Action to match lines against a regular expression, glob, string, or function'
+author: 'PayPay'
 inputs:
-  milliseconds: # change this
+  targetFile:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'Checked file'
+  matchersFile:
+    required: true
+    description: '(Array|String|RegExp|Function) String to be directly matched, string with glob patterns, regular expression test, function that takes the testString as an argument and returns a truthy value if it should be matched, or an array of any number and mix of these types.'
+  allow_failure:
+    description: 'Makes the Action fail on match.'
+    default: false
+    required: false
+outputs:
+  match_count:
+    description: 'Count of matched lines.'
 runs:
   using: 'node12'
   main: 'dist/index.js'

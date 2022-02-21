@@ -1,18 +1,32 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import {Matcher} from './lib/match'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    const matcher = new Matcher({
+      targetFile: core.getInput('targetFile'),
+      matchersFile: core.getInput('matchersFile')
+    })
+    const failure: boolean =
+      (core.getInput('allow_failure') || 'false').toUpperCase() === 'TRUE'
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const result = await matcher.check()
 
-    core.setOutput('time', new Date().toTimeString())
+    if (result.length === 0) {
+      core.info('🎉 None found')
+    } else {
+      if (failure) {
+        core.setFailed('❗Matching lines:')
+      } else {
+        core.info('❗Matching lines:')
+      }
+      for (const line of result) {
+        core.info(line)
+      }
+    }
+    core.setOutput('match_count', result.length)
   } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
+    core.setFailed((error as Error).message)
   }
 }
 
