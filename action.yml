@@ -1,11 +1,20 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Match Lines'
+description: 'GitHub Action to match lines against a matchers file'
+author: 'PayPay'
 inputs:
-  milliseconds: # change this
+  targetFile:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'File to be checked.'
+  matchersFile:
+    required: true
+    description: 'File with regular expression.'
+  allow_failure:
+    description: 'Makes the Action fail on match.'
+    default: false
+    required: false
+outputs:
+  match_count:
+    description: 'Count of matched lines.'
 runs:
   using: 'node12'
   main: 'dist/index.js'
