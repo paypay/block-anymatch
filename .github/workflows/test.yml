@@ -21,4 +21,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          milliseconds: 1000
+          targetFile: '__tests__/data/gradle.lockfile.test'
+          matchersFile: '__tests__/data/matcher.01.test'
