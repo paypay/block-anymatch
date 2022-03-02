@@ -1,15 +1,17 @@
 # Match Lines
 
-> GitHub Action to match lines against a matchers file
+> GitHub Action to match lines against a matcher
 
 ## Usage
-The following example workflow step will check for file: `foo/bar` against a matchers file: `.github/data/matchers`
+The following example workflow step will check for file: `foo/bar` against a matcher
 ```yaml
 - name: Match Lines
   uses: paypay/match-lines-action
   with:
-    targetFile: 'foo/bar'
-    matchersFile: '.github/data/matchers'
+    target_file: 'foo/bar'
+    matcher: |
+      app1:1\.[0-4]\.0
+      app2:1\.0\.0
   ...
 ```
 
@@ -25,20 +27,14 @@ com.company2:app3:1.0.0=compileClasspath,runtimeClasspath
 ...
 ```
 
-### Example matchers file `.github/data/matchers`
-```text
-app1:1\.[0-4]\.0
-app2:1\.0\.0
-```
-
 ## Options ⚙️
 
 The following input variables options can/must be configured:
 
 |Input variable|Necessity|Description|Default|
 |----|----|----|----|
-|`targetFile`|Required|File to be checked.||
-|`matchersFile`|Required|File with [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).||
+|`target_file`|Required|File to be checked.||
+|`matcher`|Required|Multiline with [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).||
 |`allow_failure`|Optional|Makes the Action fail on matching lines.|`false`|
 
 ## Outputs

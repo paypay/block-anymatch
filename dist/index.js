@@ -53,7 +53,7 @@ class Matcher {
                 const inStream = fs_1.default.createReadStream(this.props.targetFile);
                 const rl = readline.createInterface({ input: inStream });
                 const result = [];
-                const matchers = fs_1.default.readFileSync(this.props.matchersFile, { encoding: 'utf-8' }).toString().split("\n").filter(x => x).map(x => new RegExp(x));
+                const matchers = this.props.matcher;
                 rl.on('line', function (line) {
                     if (line && (0, anymatch_1.default)(matchers, line)) {
                         result.push(line);
@@ -111,8 +111,8 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const matcher = new match_1.Matcher({
-                targetFile: core.getInput('targetFile'),
-                matchersFile: core.getInput('matchersFile')
+                targetFile: core.getInput('target_file'),
+                matcher: core.getMultilineInput('matcher').map(x => new RegExp(x))
             });
             const failure = (core.getInput('allow_failure') || 'false').toUpperCase() === 'TRUE';
             const result = yield matcher.check();

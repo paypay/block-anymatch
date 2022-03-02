@@ -4,7 +4,7 @@ import * as readline  from 'readline'
 
 export interface MatcherProps {
   targetFile: string
-  matchersFile: string
+  matcher: (string | RegExp) []
 }
 
 export class Matcher {
@@ -20,7 +20,7 @@ export class Matcher {
       const inStream = fs.createReadStream(this.props.targetFile);
       const rl = readline.createInterface( {input: inStream });
       const result: string[] = [];
-      const matchers= fs.readFileSync(this.props.matchersFile, {encoding: 'utf-8'}).toString().split("\n").filter(x => x).map(x=> new RegExp(x));
+      const matchers= this.props.matcher;
       rl.on('line', function (line) {
         if (line && anyMatch(matchers, line)) {
           result.push(line)

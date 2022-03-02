@@ -1,13 +1,13 @@
 name: 'Match Lines'
-description: 'GitHub Action to match lines against a matchers file'
+description: 'GitHub Action to match lines against a matcher'
 author: 'PayPay'
 inputs:
-  targetFile:
+  target_file:
     required: true
     description: 'File to be checked.'
-  matchersFile:
+  matcher:
     required: true
-    description: 'File with regular expression.'
+    description: 'Multiline with regular expression.'
   allow_failure:
     description: 'Makes the Action fail on match.'
     default: false
@@ -18,3 +18,6 @@ outputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  color: blue
+  icon: check-circle
