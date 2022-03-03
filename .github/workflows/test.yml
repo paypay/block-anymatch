@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: paypay/match-lines-action/.github/workflows/reusable-workflow.yml@main
+      - uses: paypay/match-lines-action/.github/workflows/reusable-workflow.yml@test
         with:
           target_file: '__tests__/data/gradle.lockfile.test'
           matcher: |
