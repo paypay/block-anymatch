@@ -1,0 +1,23 @@
+name: Reusable workflow
+
+on:
+  workflow_call:
+
+jobs:
+  main:
+    name: Main job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check Dependencies
+        if: "!contains(github.event.pull_request.labels.*.name, 'skip-check-dependencies')"
+        uses: paypay/match-lines-action@dev_01
+        with:
+          target_file: 'gradle.lockfile'
+          matcher: |
+            spring-boot-starter:[0-1]
+            spring-boot-starter:2\.[0-3]
+            yaml:snakeyaml:1
+          allow_failure: true
