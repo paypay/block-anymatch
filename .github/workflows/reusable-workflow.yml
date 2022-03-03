@@ -13,7 +13,7 @@ jobs:
 
       - name: Check Dependencies
         if: "!contains(github.event.pull_request.labels.*.name, 'skip-check-dependencies')"
-        uses: paypay/match-lines-action@dev_01
+        uses: paypay/match-lines-action@test
         with:
           target_file: 'gradle.lockfile'
           matcher: |
