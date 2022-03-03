@@ -4,6 +4,7 @@ on: # rebuild any PRs and main branch changes
   push:
     branches:
       - main
+      - test
       - 'releases/*'
 
 jobs:
@@ -19,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - uses: paypay/match-lines-action/.github/workflows/reusable-workflow.yml@main
         with:
           target_file: '__tests__/data/gradle.lockfile.test'
           matcher: |
